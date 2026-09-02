@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonchoigame - Bio Link</title>
+    <!-- Font chữ và Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: #0f1015;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Bar (Clock & Menu) */
+        .top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .clock-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Khung Avatar chuẩn Thách Đấu Liên Quân */
+        .conqueror-avatar-wrapper {
+            position: relative;
+            width: 135px;
+            height: 135px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .conqueror-avatar-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fff2b2, #9254da, #6d059e, #ce66d8, #fff2b2);
+            background-size: 300% 300%;
+            animation: conquerorGlow 3s ease infinite alternate;
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(171, 11, 245, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .conqueror-avatar-wrapper::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 42%;
+            border: 2px solid rgba(132, 11, 245, 0.4);
+            animation: conquerorRotate 10s linear infinite;
+            z-index: 0;
+        }
+
+        @keyframes conquerorGlow {
+            0% {
+                background-position: 0% 50%;
+                box-shadow: 0 0 12px rgba(159, 11, 245, 0.5), inset 0 0 8px rgba(255, 242, 178, 0.5);
+            }
+            100% {
+                background-position: 100% 50%;
+                box-shadow: 0 0 25px rgba(154, 36, 251, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.9);
+            }
+        }
+
+        @keyframes conquerorRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-container {
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            border: 3px solid #111;
+            overflow: hidden;
+            background: #0f1015;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .conqueror-avatar-wrapper:hover img {
+            transform: scale(1.08);
+        }
+
+        .badge-user {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-bottom: 10px;
+            color: #d1d5db;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge-user .fa-circle-check {
+            color: #3b82f6;
+            font-size: 14px;
+        }
+
+        .name-box {
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #dacee0, #9d0aff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Nút Get Key Nổi Bật */
+        .get-key-highlight-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ecebe8, #62b0cf, #68e7b2);
+            background-size: 200% 200%;
+            animation: gradientMove 4s ease infinite;
+            color: #ffffff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(198, 11, 245, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-decoration: none;
+        }
+
+        .get-key-highlight-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(98, 3, 175, 0.6);
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Stats Box */
+        .stats-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-around;
+            padding: 18px 0;
+            margin-bottom: 25px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        /* Social buttons row */
+        .social-row {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .social-btn {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            border-radius: 14px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-btn.tiktok-vip {
+            background: linear-gradient(135deg, rgba(0, 2, 19, 0.651), rgba(8, 0, 15, 0.603));
+            border: 1.5px solid #000000;
+            position: relative;
+            overflow: hidden;
+            animation: vipGlowsss 2s infinite alternate;
+        }
+
+        .social-btn.tiktok-vip i {
+            color: #f8f8f8;
+            animation: bounceIcon 1s infinite alternate;
+        }
+
+
+        .social-btn.discord-vip {
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.2), rgba(168, 85, 247, 0.2));
+            border: 1.5px solid #818cf8;
+            position: relative;
+            overflow: hidden;
+            animation: vipGlow 2s infinite alternate;
+        }
+
+        .social-btn.discord-vip i {
+            color: #818cf8;
+            animation: bounceIcon 1s infinite alternate;
+        }
+
+         .social-btn.telegram-vip {
+            background: linear-gradient(135deg, rgba(35, 169, 187, 0.397), rgba(24, 194, 224, 0.432));
+            border: 1.5px solid #53a7eb;
+            position: relative;
+            overflow: hidden;
+            animation: vipGlows 2s infinite alternate;
+        }
+
+        .social-btn.telegram-vip i {
+            color: #2bb8f0;
+            animation: bounceIcon 1s infinite alternate;
+        }
+
+        .social-btn.youtube-vip {
+            background: linear-gradient(135deg, rgba(242, 119, 88, 0.39), rgba(247, 85, 85, 0.473));
+            border: 1.5px solid #eb5d53;
+            position: relative;
+            overflow: hidden;
+            animation: vipGlowss 2s infinite alternate;
+        }
+
+        .social-btn.youtube-vip i {
+            color: #f02b2b;
+            animation: bounceIcon 1s infinite alternate;
+        }
+
+    
+        @keyframes vipGlowsss {
+            0% {
+                box-shadow: 0 0 5px rgba(29, 29, 29, 0.3), inset 0 0 5px rgba(0, 0, 0, 0.1);
+                border-color: #000000;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(7, 7, 7, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.4);
+                border-color: #030303;
+            }
+        }
+
+        @keyframes vipGlow {
+            0% {
+                box-shadow: 0 0 5px rgba(129, 140, 248, 0.3), inset 0 0 5px rgba(129, 140, 248, 0.1);
+                border-color: #6366f1;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(168, 85, 247, 0.7), inset 0 0 10px rgba(129, 140, 248, 0.4);
+                border-color: #c084fc;
+            }
+        }
+
+        @keyframes vipGlows {
+            0% {
+                box-shadow: 0 0 5px rgba(47, 184, 226, 0.3), inset 0 0 5px rgba(54, 154, 235, 0.1);
+                border-color: #63ecf1;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(85, 196, 247, 0.7), inset 0 0 10px rgba(129, 210, 248, 0.4);
+                border-color: #1fa3c4;
+            }
+        }
+
+        @keyframes vipGlowss {
+            0% {
+                box-shadow: 0 0 5px rgba(238, 32, 32, 0.3), inset 0 0 5px rgba(231, 42, 42, 0.1);
+                border-color: #ee2323;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(240, 33, 33, 0.87), inset 0 0 10px rgba(231, 74, 74, 0.4);
+                border-color: #ec0a0a;
+            }
+        }
+
+        @keyframes bounceIcon {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-2px); }
+        }
+
+        /* Section Titles */
+        .section-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #60a5fa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            align-self: flex-start;
+            margin: 25px 0 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .section-heading {
+            align-self: flex-start;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        /* Link Cards */
+        .link-card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 16px;
+            border-radius: 16px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .link-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .link-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .link-icon, .link-thumb {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .bg-blue { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+
+        .link-info h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .link-info p {
+            font-size: 12px;
+            color: #9ca3af;
+        }
+
+        .link-action {
+            color: #9ca3af;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Game Mod / Item Card đặc biệt */
+        .mod-card {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px;
+            border-radius: 16px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .mod-card:hover {
+            background: rgba(255, 255, 255, 0.09);
+        }
+
+        .mod-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mod-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .mod-details h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .mod-details p {
+            font-size: 11px;
+            color: #9ca3af;
+            margin-bottom: 6px;
+        }
+
+        .tags-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .mini-tag {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 10px;
+            color: #d1d5db;
+        }
+
+        .download-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* Custom Modal thông báo chung */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-box {
+            background: #181920;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 90%;
+            max-width: 360px;
+            padding: 24px;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            transform: scale(0.8);
+            transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-box h3 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .modal-box p {
+            font-size: 13px;
+            color: #9ca3af;
+            margin-bottom: 20px;
+            word-break: break-all;
+            line-height: 1.5;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .modal-btn.cancel {
+            background: rgba(255, 255, 255, 0.08);
+            color: #d1d5db;
+        }
+        .modal-btn.cancel:hover { background: rgba(255, 255, 255, 0.12); }
+
+        .modal-btn.confirm {
+            background: linear-gradient(135deg, #f3f63b, #7163f1, #048399);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(146, 59, 246, 0.4);
+        }
+        .modal-btn.confirm:hover { opacity: 0.9; }
+
+        /* Hiệu ứng cho Popup Chào Mừng Siêu Sáng & Nổi Bật */
+        .welcome-modal-box {
+            background: linear-gradient(145deg, #181920, #1f2029);
+            border: 2px solid #9f0bf5;
+            box-shadow: 0 0 30px rgba(199, 161, 221, 0.4), inset 0 0 15px rgba(160, 124, 245, 0.2);
+        }
+
+        .glowing-welcome-text {
+            font-size: 16px;
+            font-weight: 800;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #a75efa, #dbceeb, #d549ff, #a65dfa);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textGlowAnim 3s ease infinite alternate;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes textGlowAnim {
+            0% { background-position: 0% 50%; filter: drop-shadow(0 0 2px rgba(101, 11, 245, 0.5)); }
+            100% { background-position: 100% 50%; filter: drop-shadow(0 0 8px rgba(146, 56, 248, 0.8)); }
+        }
+
+        .welcome-icon-badge {
+            width: 60px;
+            height: 60px;
+            background: rgba(241, 240, 237, 0.15);
+            border: 2px solid rgba(185, 127, 212, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            color: #d11f12;
+            margin: 0 auto 15px auto;
+            animation: iconPulse 2s infinite alternate;
+        }
+
+        @keyframes iconPulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
+            100% { transform: scale(1.08); box-shadow: 0 0 15px rgba(54, 1, 124, 0.6); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Phát nhạc nền tự động khi vào web -->
+    <audio id="bg-music" loop>
+        <source src="https://www.image2url.com/r2/default/audio/1787964521721-2e5f0d6f-e701-4a71-9d82-63ba86eff5b7.m4a" type="audio/mpeg">
+    </audio>
+
+    <div class="container" onclick="playMusicOnTouch()">
+        <!-- Thanh thời gian và menu -->
+        <div class="top-bar">
+            <div class="clock-box">
+                <span id="clock">23:03:16</span>
+                <i class="fa-solid fa-moon" style="color: #818cf8;"></i>
+            </div>
+            <div class="menu-btn" onclick="openInBrowser()">
+                <i class="fa-solid fa-compass" title="Mở ngoài trình duyệt"></i>
+            </div>
+        </div>
+
+        <!-- Khung Avatar Thách Đấu Liên Quân -->
+        <div class="conqueror-avatar-wrapper">
+            <div class="avatar-container">
+                <img src="images/avt/avt.jpg" alt="Avatar" >
+            </div>
+        </div>
+
+        <div class="badge-user">
+            <span>Sonchoigame</span>
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+
+        <div class="name-box">NS MOD</div>
+
+        <!-- Nút Get Key Nổi Bật (Cuộn xuống cuối trang) -->
+        <a href="#get-key-section" class="get-key-highlight-btn">
+            <i class="fa-solid fa-gamepad"></i> TẢI GAME NGAY <i class="fa-solid fa-arrow-down"></i>
+        </a>
+
+        <!-- Hộp thống kê -->
+        <div class="stats-box">
+            <div class="stat-item">
+                <div class="stat-value" id="view-count">5000</div>
+                <div class="stat-label">Lượt xem</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2026</div>
+                <div class="stat-label">Cập nhật</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">#1</div>
+                <div class="stat-label">iOS</div>
+            </div>
+        </div>
+
+        <!-- Các nút mạng xã hội hàng ngang có hiệu ứng -->
+        <div class="section-tag"><i class="fa-solid fa-rss"></i> ĐĂNG KÝ KÊNH TẠI ĐÂY</div>
+        <div class="social-row">
+            <a href="https://www.youtube.com/@nsmod06" class="social-btn youtube-vip" target="_blank">
+               <i class="fa-brands fa-youtube"></i> Youtube 
+           </a>
+           <a href="https://www.tiktok.com/@pettersiuto?_r=1&_t=ZS-99GFgTVAHFX" class="social-btn tiktok-vip" target="_blank">
+               <i class="fa-brands fa-tiktok"></i> TikTok
+            </a>
+        
+        </div>
+
+        <div class="section-tag"><i class="fa-regular fa-bell"></i> NHÓM THÔNG BÁO BẮT BUỘC VÀO</div>
+        <div class="social-row">
+            <a href="https://t.me/sonchoigame23" class="social-btn telegram-vip" target="_blank">
+                <i class="fa-brands fa-telegram"></i> Kênh Telegram 
+            </a>
+            <a href="https://discord.gg/aJPfd6jbJv" class="social-btn discord-vip" target="_blank">
+               <i class="fa-brands fa-discord"></i> Kênh Discord 
+           </a>
+           
+
+        </div>
+
+        <!-- Hướng Dẫn MOD  -->
+          <div class="section-tag"><i class="fa-solid fa-tv"></i> Video Hướng Dẫn</div>
+
+
+        <a href="https://youtu.be/W82SUHn3Fnc?si=RspgnKVA_SpmViPl" class="link-card" target="_blank">
+            <div class="link-left">
+                <img src="images/hd/YTubeTool_image.jpg" class="link-thumb" alt="Guide">
+                <div class="link-info">
+                    <h3> Hack Map Unlock Full Skin Game Gốc LQ Bằng 3105</h3>
+                    <p>• Đã cập nhật 28/8</p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Hướng Dẫn </span>
+                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                    </div>
+                    
+                </div>
+            </div>
+            <i class="fa-solid fa-chevron-right link-action"></i>
+        </a>
+
+        <!-- TẠO THÊM NÚT CP TRÊN -->
+        
+
+        <!-- Mục Game Mods -->
+        <div class="section-tag"><i class="fa-solid fa-gamepad"></i> PATCH 3105 + FILE MOD</div>
+        
+        
+        <!-- MỤC FILE .3105-->
+        <h2 class="section-heading" style="width: 100%;"> FILE PATCH TRÊN 3105 </h2>
+
+        <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH HACK MAP + UNLOCKSKIN VIP   </h4>
+                    <p>• GAME GỐC NO IPA</p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+        <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH UNLOCKSKIN VIP NO MAP   </h4>
+                    <p>• GAME GỐC NO IPA</p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+        <a href="https://tasksub.io/usgST" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH UNLOCK FULL SKIN PUBG   </h4>
+                    <p>• GAME GỐC NO IPA</p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+        <a href="https://tasksub.io/hxDK" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH HACK VIP PUBG   </h4>
+                    <p>• GAME GỐC NO IPA </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+        <a href="https://tasksub.io/UAlMVs" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/PVZ2.webp" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH HACK PVZ2   </h4>
+                    <p>• FULL CÂY SHOP ĐỒNG GIÁ 1 ĐỒNG </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+
+
+         <a href="https://tasksub.io/u9rWNG" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/3105/cdcrush.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH CADY CRUSH   </h4>
+                    <p>• VÔ HẠN PHỤ TRỢ </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+
+         <a href="https://tasksub.io/FCSA" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/3105/subway-surfersl.webp" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> PATCH SUBWAY SUFERS   </h4>
+                    <p>• FULL MỌI THỨ </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+
+
+
+
+        <!-- MỤC FILES MOD-->
+         <h2 class="section-heading" style="width: 100%;"> FILE MOD TỰ DÁN </h2>
+         <a href="https://tasksub.io/KIBYwPN" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> ĐỊNH VỊ + AIMBODY FFM  </h4>
+                    <p>• DÀNH CHO FREE FIRE MAX </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+
+        
+
+        <!-- Tải iPA -->
+        <div id="get-key-section" class="section-tag"><i class=" fa-brands fa-app-store"></i> APP CRACK + MODS GAME</div>
+        <h2 class="section-heading" style="width: 100%;">TẢI IPA</h2>
+
+        <a href=" https://vuotlink.xyz/Fileapp3105 " class="link-card" target="_blank">
+            <div class="link-left">
+                <img src="images/appMOD/IMGAPP1.png" class="link-thumb" alt="Guide">
+                <div class="link-info">
+                    <h3>APP 3105</h3>
+                    <p>v1.1.1</p>
+                </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+        </a>
+
+        <a href="https://tasksub.io/at7wC9c" class="link-card" target="_blank">
+            <div class="link-left">
+                <img src="images/ipa/8ballpool.jpg" class="link-thumb" alt="Guide">
+                <div class="link-info">
+                    <h3>iPA MENU NO KEY 8BP</h3>
+                    <p>• Đã cập nhật 29/8</p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                    </div>
+                </div>
+            </div>
+            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+        </a>
+
+        
+    <!-- Popup Chào Mừng / Lưu Ý Khi Vào Trang -->
+    <div class="modal-overlay active" id="welcomeModal">
+        <div class="modal-box welcome-modal-box" onclick="event.stopPropagation()">
+            <div class="welcome-icon-badge">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="glowing-welcome-text">
+        
+                MỌI THẮC MẮC HỎI ADMIN<br><br>CHÚC CÁC VỢ DÙNG VUI VẺ 💝
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn confirm" onclick="closeWelcomeModal()" style="width: 100%;">ĐÃ HIỂU, VÀO WEB</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').innerText = `${hours}:${minutes}:${seconds}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        function handleViewCount() {
+            const sessionKey = 'has_viewed_session';
+            let views = parseInt(localStorage.getItem('global_site_views')) || 5000;
+            if (!sessionStorage.getItem(sessionKey)) {
+                sessionStorage.setItem(sessionKey, 'true');
+                views += 1;
+                localStorage.setItem('global_site_views', views);
+            }
+            document.getElementById('view-count').innerText = views.toLocaleString();
+        }
+        handleViewCount();
+
+        let musicStarted = false;
+        function playMusicOnTouch() {
+            if (!musicStarted) {
+                const music = document.getElementById('bg-music');
+                music.play().catch(e => console.log("Autoplay blocked"));
+                musicStarted = true;
+            }
+        }
+        window.addEventListener('load', () => {
+            const music = document.getElementById('bg-music');
+            music.play().catch(() => {});
+        });
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').classList.remove('active');
+        }
+
+        function openKeyAdrModal() {
+            document.getElementById('keyAdrModal').classList.add('active');
+        }
+
+        function closeKeyAdrModalDirect() {
+            document.getElementById('keyAdrModal').classList.remove('active');
+        }
+
+        function closeKeyAdrModal(event) {
+            if (event.target.id === 'keyAdrModal') {
+                document.getElementById('keyAdrModal').classList.remove('active');
+            }
+        }
+
+        function openInBrowser() {
+            const currentUrl = window.location.href;
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.location.href = currentUrl;
+            } else {
+                window.open(currentUrl, '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
