@@ -644,13 +644,84 @@
             0% { transform: scale(1); box-shadow: 0 0 0 rgba(245, 158, 11, 0); }
             100% { transform: scale(1.08); box-shadow: 0 0 15px rgba(54, 1, 124, 0.6); }
         }
+
+        /* Thanh tìm kiếm */
+.search-box {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    flex: 1;
+    min-width: 0;
+    padding: 14px 18px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #9ca3af;
+}
+
+.search-box input:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 15px rgba(129, 140, 248, 0.15);
+}
+
+.search-box button {
+    width: 48px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    opacity: 0.85;
+}
+
+.search-item-hidden {
+    display: none !important;
+}
+
+.search-no-result {
+    width: 100%;
+    text-align: center;
+    color: #9ca3af;
+    font-size: 13px;
+    padding: 20px 0;
+    display: none;
+}
+
+/* Khi đang tìm kiếm: chỉ hiện card file */
+body.searching .section-tag,
+body.searching .section-heading {
+    display: none !important;
+}
+
+/* Không để khoảng trống do các mục bị ẩn */
+.search-item-hidden {
+    display: none !important;
+}
+
+
+
+
     </style>
 </head>
 <body>
 
     <!-- Phát nhạc nền tự động khi vào web -->
     <audio id="bg-music" loop>
-        <source src="https://www.image2url.com/r2/default/files/1788605543185-60c75bf5-22cf-4f00-b84c-ec0f9a3b6f7b.mp3" type="audio/mpeg">
+        <source src="https://www.image2url.com/r2/default/files/1788605543185-60c75bf5-22cf-4f00-b84c-ec0f9a3b6f7b.mp3" type="audio/mp3">
     </audio>
 
     <div class="container" onclick="playMusicOnTouch()">
@@ -700,10 +771,12 @@
             </div>
         </div>
 
+                
+
         <!-- Các nút mạng xã hội hàng ngang có hiệu ứng -->
         <div class="section-tag"><i class="fa-solid fa-rss"></i> ĐĂNG KÝ KÊNH TẠI ĐÂY</div>
         <div class="social-row">
-            <a href="https://www.youtube.com/@nsmod06" class="social-btn youtube-vip" target="_blank">
+            <a href="https://www.youtube.com/@Sonchoigame123" class="social-btn youtube-vip" target="_blank">
                <i class="fa-brands fa-youtube"></i> Youtube 
            </a>
            <a href="https://www.tiktok.com/@pettersiuto?_r=1&_t=ZS-99GFgTVAHFX" class="social-btn tiktok-vip" target="_blank">
@@ -722,6 +795,24 @@
            </a>
            
 
+        </div>
+
+
+        <!-- THANH TÌM KIẾM -->
+        <div class="search-box">
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="🔍 Tìm kiếm file, game, mod..."
+                autocomplete="off"
+            >
+            <button type="button" onclick="searchItems()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+
+        <div class="search-no-result" id="searchNoResult">
+            Không tìm thấy kết quả 😢
         </div>
 
         <!-- Hướng Dẫn MOD  -->
@@ -973,6 +1064,23 @@
             <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
         </a>
 
+        <a href="https://tasksub.io/en/lGSH" class="mod-card" target="_blank">
+            <div class="mod-left">
+                <img src="images/avt/avt.jpg" class="mod-thumb" alt="Game">
+                <div class="mod-details">
+                    <h4> NGUỒN HÌNH NỀN + APP   </h4>
+                    <p>• CAPCUT, DAZZCAM PRO </p>
+                    <p>• HÌNH NỀN, PHÍM GỌI VIP </p>
+                    <div class="tags-row">
+                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
+                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+        </a>
+
+
 
          <!-- MỤC BYPASS -->
          <h2 class="section-heading" style="width: 100%;"> FILE BYPASS + ANTIBAN </h2>
@@ -1161,6 +1269,67 @@
 
 
     <script>
+                // TÌM KIẾM FILE
+const searchInput = document.getElementById("searchInput");
+const searchNoResult = document.getElementById("searchNoResult");
+
+const searchItemsList = document.querySelectorAll(
+    ".mod-card, .link-card"
+);
+
+function searchItems() {
+    const keyword = searchInput.value.toLowerCase().trim();
+    let found = 0;
+
+    // Không nhập gì thì hiện lại giao diện ban đầu
+    if (keyword === "") {
+        document.body.classList.remove("searching");
+
+        searchItemsList.forEach(item => {
+            item.classList.remove("search-item-hidden");
+        });
+
+        searchNoResult.style.display = "none";
+        return;
+    }
+
+    // Đang tìm thì ẩn các tiêu đề nhóm
+    document.body.classList.add("searching");
+
+    searchItemsList.forEach(item => {
+        const title = item.querySelector(
+            "h3, h4"
+        )?.innerText.toLowerCase() || "";
+
+        const description = item.innerText.toLowerCase();
+
+        // Chỉ tìm theo tên tiêu đề file và nội dung bên trong card
+        if (
+            title.includes(keyword) ||
+            description.includes(keyword)
+        ) {
+            item.classList.remove("search-item-hidden");
+            found++;
+        } else {
+            item.classList.add("search-item-hidden");
+        }
+    });
+
+    searchNoResult.style.display =
+        found === 0 ? "block" : "none";
+}
+
+// Tìm ngay khi nhập
+searchInput.addEventListener("input", searchItems);
+
+
+
+
+
+
+
+
+
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
