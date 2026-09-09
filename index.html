@@ -382,6 +382,17 @@
             margin-bottom: 15px;
         }
 
+        /* Wrapper for sections that contain searchable files.
+           Gets .search-item-hidden applied to it when a search
+           term matches nothing inside it, so the heading/tag
+           hides along with its (empty) card list. */
+        .searchable-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
         /* Link Cards */
         .link-card {
             width: 100%;
@@ -646,71 +657,66 @@
         }
 
         /* Thanh tìm kiếm */
-.search-box {
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    margin-bottom: 25px;
-}
+        .search-box {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
 
-.search-box input {
-    flex: 1;
-    min-width: 0;
-    padding: 14px 18px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.05);
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-}
+        .search-box input {
+            flex: 1;
+            min-width: 0;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
 
-.search-box input::placeholder {
-    color: #9ca3af;
-}
+        .search-box input::placeholder {
+            color: #9ca3af;
+        }
 
-.search-box input:focus {
-    border-color: #818cf8;
-    box-shadow: 0 0 15px rgba(129, 140, 248, 0.15);
-}
+        .search-box input:focus {
+            border-color: #818cf8;
+            box-shadow: 0 0 15px rgba(129, 140, 248, 0.15);
+        }
 
-.search-box button {
-    width: 48px;
-    border: none;
-    border-radius: 14px;
-    background: linear-gradient(135deg, #6366f1, #a855f7);
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
+        .search-box button {
+            width: 48px;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
 
-.search-box button:hover {
-    opacity: 0.85;
-}
+        .search-box button:hover {
+            opacity: 0.85;
+        }
 
-.search-item-hidden {
-    display: none !important;
-}
+        .search-item-hidden {
+            display: none !important;
+        }
 
-.search-no-result {
-    width: 100%;
-    text-align: center;
-    color: #9ca3af;
-    font-size: 13px;
-    padding: 20px 0;
-    display: none;
-}
+        .search-no-result {
+            width: 100%;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 13px;
+            padding: 20px 0;
+            display: none;
+        }
 
-/* Khi đang tìm kiếm: chỉ hiện card file */
-body.searching .section-tag,
-body.searching .section-heading {
-    display: none !important;
-}
+        /* Khi tìm kiếm, ẩn riêng khu vực Video Hướng Dẫn */
+        body.searching .video-guide-only {
+            display: none !important;
+        }
 
-/* Không để khoảng trống do các mục bị ẩn */
-.search-item-hidden {
-    display: none !important;
-}
 
 
 
@@ -816,10 +822,10 @@ body.searching .section-heading {
         </div>
 
         <!-- Hướng Dẫn MOD  -->
-          <div class="section-tag"><i class="fa-solid fa-tv"></i> Video Hướng Dẫn</div>
+          <div class="section-tag video-guide-only"><i class="fa-solid fa-tv"></i> Video Hướng Dẫn</div>
 
 
-        <a href="https://www.tiktok.com/@pettersiuto/video/7683040993452543240" class="link-card" target="_blank">
+        <a href="https://www.tiktok.com/@pettersiuto/video/7683040993452543240" class="link-card video-guide-only" target="_blank">
             <div class="link-left">
                 <img src="images/hd/YTubeTool_image.jpg" class="link-thumb" alt="Guide">
                 <div class="link-info">
@@ -836,7 +842,7 @@ body.searching .section-heading {
         </a>
 
 
-        <a href="https://www.tiktok.com/@pettersiuto/video/7681965920205409554" class="link-card" target="_blank">
+        <a href="https://www.tiktok.com/@pettersiuto/video/7681965920205409554" class="link-card video-guide-only" target="_blank">
             <div class="link-left">
                 <img src="images/filemod/AVTHAI.webp" class="link-thumb" alt="Guide">
                 <div class="link-info">
@@ -856,447 +862,462 @@ body.searching .section-heading {
         
 
         <!-- Mục Game Mods -->
-        <div class="section-tag"><i class="fa-solid fa-gamepad"></i> PATCH 3105 + FILE MOD</div>
-        
-        
-        <!-- MỤC FILE .3105-->
-        <h2 class="section-heading" style="width: 100%;"> FILE PATCH TRÊN 3105 </h2>
+        <div class="searchable-section">
+            <div class="section-tag"><i class="fa-solid fa-gamepad"></i> PATCH 3105 + FILE MOD</div>
+            
+            
+            <!-- MỤC FILE .3105-->
+            <h2 class="section-heading" style="width: 100%;"> FILE PATCH TRÊN 3105 </h2>
 
-        <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH HACK MAP + UNLOCKSKIN VIP   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• GAME GỐC NO IPA</p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH HACK MAP + UNLOCKSKIN VIP   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA</p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
-        <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH UNLOCKSKIN CAM XA NO MAP   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• GAME GỐC NO IPA</p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://t.me/sonchoigame23/7" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH UNLOCKSKIN CAM XA NO MAP   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA</p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
 
-        <a href="https://t.me/sonchoigame23/28" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH LQ UNLOCKSKIN    </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• KHÔNG MAP , KHÔNG CAM XA</p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://t.me/sonchoigame23/28" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/imgf1.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH LQ UNLOCKSKIN    </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• KHÔNG MAP , KHÔNG CAM XA</p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
-        <a href="https://tasksub.io/friMaqU" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH FULL AIM FFM  </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• GAME GỐC NO IPA </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://tasksub.io/friMaqU" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH FULL AIM FFM  </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
-        
-        <a href="https://tasksub.io/usgST" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH UNLOCK FULL SKIN PUBG   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• GAME GỐC NO IPA</p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+            
+            <a href="https://tasksub.io/usgST" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH UNLOCK FULL SKIN PUBG   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA</p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
 
-        <a href="https://tasksub.io/hxDK" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH HACK VIP PUBG   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• GAME GỐC NO IPA </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://tasksub.io/hxDK" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/pubg.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH HACK VIP PUBG   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
-        <a href="https://tasksub.io/IoYOos" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/PVZ2.webp" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH HACK PVZ2   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• FULL CÂY SHOP ĐỒNG GIÁ 1 ĐỒNG </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://tasksub.io/IoYOos" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/PVZ2.webp" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH HACK PVZ2   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• FULL CÂY SHOP ĐỒNG GIÁ 1 ĐỒNG </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
 
 
-         <a href="https://tasksub.io/Lsx" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/3105/cdcrush.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH CADY CRUSH   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• VÔ HẠN PHỤ TRỢ </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://tasksub.io/Lsx" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/3105/cdcrush.jpg" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH CADY CRUSH   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• VÔ HẠN PHỤ TRỢ </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
 
-         <a href="https://tasksub.io/7zyb7Dw" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/3105/subway-surfersl.webp" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> PATCH SUBWAY SUFERS   </h4>
-                    <p>• DÙNG CHO APP 3105</p>
-                    <p>• FULL MỌI THỨ </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+            <a href="https://tasksub.io/7zyb7Dw" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/3105/subway-surfersl.webp" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> PATCH SUBWAY SUFERS   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• FULL MỌI THỨ </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+        </div>
 
         <!--MỤC TẢI FILE CẤU HÌNH -->
-        <h2 class="section-heading" style="width: 100%;"> NGUỒN RAW </h2>
-         <a href="https://oklink2.online/FFTHDD" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/3105/ffth.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> NGUỒN RAW FULL FFTH  </h4>
-                    <p>• DÁN VÀO APP 3105 </p>
-                    <p>• FULL AIM + ĐỊNH VỊ VIP </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                    </div>
-                </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+         <div class="searchable-section">
 
-        <a href="https://tasksub.io/EFs" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/AVTHAI.webp" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> NGUỒN RAW FULL LQ  </h4>
-                    <p>• DÁN VÀO APP 3105 </p>
-                    <p>• FULL FILE HACK MAP </p>
-                    <p>• UNLOCK FULL SKIN </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                <h2 class="section-heading" style="width: 100%;"> NGUỒN RAW </h2>
+                <a href="https://oklink2.online/FFTHDD" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/3105/ffth.png" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> NGUỒN RAW FULL FFTH  </h4>
+                            <p>• DÁN VÀO APP 3105 </p>
+                            <p>• FULL AIM + ĐỊNH VỊ VIP </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
+
+                <a href="https://tasksub.io/EFs" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/filemod/AVTHAI.webp" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> NGUỒN RAW FULL LQ  </h4>
+                            <p>• DÁN VÀO APP 3105 </p>
+                            <p>• FULL FILE HACK MAP </p>
+                            <p>• UNLOCK FULL SKIN </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
 
 
-        <a href="https://vuotlink.xyz/pubgraw" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/PUBG2.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> NGUỒN RAW PUBG  </h4>
-                    <p>• DÁN VÀO APP 3105 </p>
-                    <p>• ESP , AIMBOT ,... </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                <a href="https://vuotlink.xyz/pubgraw" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/filemod/PUBG2.jpg" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> NGUỒN RAW PUBG  </h4>
+                            <p>• DÁN VÀO APP 3105 </p>
+                            <p>• ESP , AIMBOT ,... </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
 
-        <a href="https://tasksub.io/en/lGSH" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/avt/avt.jpg" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> NGUỒN HÌNH NỀN + APP   </h4>
-                    <p>• CAPCUT, DAZZCAM PRO </p>
-                    <p>• HÌNH NỀN, PHÍM GỌI VIP </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                <a href="https://tasksub.io/en/lGSH" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/avt/avt.jpg" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> NGUỒN HÌNH NỀN + APP   </h4>
+                            <p>• CAPCUT, DAZZCAM PRO </p>
+                            <p>• HÌNH NỀN, PHÍM GỌI VIP </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video Hướng Dẫn </span>
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            </div>
+                        </div>
                     </div>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+            
+        
 
 
 
          <!-- MỤC BYPASS -->
-         <h2 class="section-heading" style="width: 100%;"> FILE BYPASS + ANTIBAN </h2>
-         <a href="https://tasksub.io/Pdt" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/CHATGPT.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> FILE BYPASS CHATGPT  </h4>
-                    <p>• DÁN VÀO CHAT </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
-                    </div>
-                </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+          <div class="searchable-section">
 
-        <a href="https://oklink2.online/dnsantiban" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/DNSANTI.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> DNS ANTIBAN FF + FFM   </h4>
-                    <p>• ANTIBAN CHO APP 3105 , FILZA </p>
-                    <p>• FILE Config </p>
-                    <p>• Các ông tải về rồi vô phần CÀI ĐẶT CHUNG NHÉ!! </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                <h2 class="section-heading" style="width: 100%;"> FILE BYPASS + ANTIBAN </h2>
+                <a href="https://tasksub.io/Pdt" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/filemod/CHATGPT.png" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> FILE BYPASS CHATGPT  </h4>
+                            <p>• DÁN VÀO CHAT </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                                <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
+
+                <a href="https://oklink2.online/dnsantiban" class="mod-card" target="_blank">
+                    <div class="mod-left">
+                        <img src="images/filemod/DNSANTI.png" class="mod-thumb" alt="Game">
+                        <div class="mod-details">
+                            <h4> DNS ANTIBAN FF + FFM   </h4>
+                            <p>• ANTIBAN CHO APP 3105 , FILZA </p>
+                            <p>• FILE Config </p>
+                            <p>• Các ông tải về rồi vô phần CÀI ĐẶT CHUNG NHÉ!! </p>
+                            <div class="tags-row">
+                                <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                                <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+                </a>
             </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+        
 
 
      
 
 
         <!-- MỤC FILES MOD-->
-         <h2 class="section-heading" style="width: 100%;"> FILE MOD TỰ DÁN </h2>
-         <a href="https://oklink2.online/DNSANTIBANTULAM" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/DNSANTI.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> DNS ANTIBAN FF + FFM   </h4>
-                    <p>• ANTIBAN CHO APP 3105 , FILZA </p>
-                    <p>• FILE CHO ANH EM MUỐN TỰ LÀM ANTIBAN </p>
-                    <p>• TẢI APP NEXTDNS VỀ RỒI DÁN NHƯ TRONG FILE </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+         <div class="searchable-section">
+            <h2 class="section-heading" style="width: 100%;"> FILE MOD TỰ DÁN </h2>
+            <a href="https://oklink2.online/DNSANTIBANTULAM" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/DNSANTI.png" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> DNS ANTIBAN FF + FFM   </h4>
+                        <p>• ANTIBAN CHO APP 3105 , FILZA </p>
+                        <p>• FILE CHO ANH EM MUỐN TỰ LÀM ANTIBAN </p>
+                        <p>• TẢI APP NEXTDNS VỀ RỒI DÁN NHƯ TRONG FILE </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
-         
-         <a href="https://tasksub.io/KIBYwPN" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> ĐỊNH VỊ + AIMBODY FFM  </h4>
-                    <p>• DÀNH CHO FREE FIRE MAX </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+            
+            <a href="https://tasksub.io/KIBYwPN" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> ĐỊNH VỊ + AIMBODY FFM  </h4>
+                        <p>• DÀNH CHO FREE FIRE MAX </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
 
-         <a href="https://tasksub.io/10ZXCkF" class="mod-card" target="_blank">
-            <div class="mod-left">
-                <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
-                <div class="mod-details">
-                    <h4> FULL AIM FFTH  </h4>
-                    <p>• FILE CHO AE TỰ DÁN  </p>
-                    <p>• DÀNH CHO FREE FIRE TH </p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+            <a href="https://tasksub.io/10ZXCkF" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/FFM.png" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> FULL AIM FFTH  </h4>
+                        <p>• FILE CHO AE TỰ DÁN  </p>
+                        <p>• DÀNH CHO FREE FIRE TH </p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
-        </a>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+        </div>
 
 
 
         
 
         <!-- Tải iPA -->
-        <div id="get-key-section" class="section-tag"><i class=" fa-brands fa-app-store"></i> APP CRACK + MODS GAME</div>
-        <h2 class="section-heading" style="width: 100%;">TẢI IPA</h2>
+         <div class="searchable-section">
+            <div id="get-key-section" class="section-tag"><i class=" fa-brands fa-app-store"></i> APP CRACK + MODS GAME</div>
+            <h2 class="section-heading" style="width: 100%;">TẢI IPA</h2>
 
-        <a href="https://tasksub.io/rIX" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/DNSNEXT.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>IPA NEXT DNS</h3>
-                    <p>by NSMOD</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
-        
-        
-        
-        <a href="https://t.me/sonchoigame23/28" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/appMOD/IMGAPP1.png" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>APP 3105</h3>
-                    <p>v3 UPDATE NEW</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
-
-        <a href=" https://vuotlink.xyz/Fileapp3105 " class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/appMOD/IMGAPP1.png" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>APP 3105</h3>
-                    <p>v1.1.1</p>
-                </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
-
-        <a href="https://tasksub.io/cR0bYH" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/8ballpool.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>iPA MENU NO KEY 8BP</h3>
-                    <p>• Đã cập nhật 29/8</p>
-                    <div class="tags-row">
-                        <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
-                        <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+            <a href="https://tasksub.io/rIX" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/DNSNEXT.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>IPA NEXT DNS</h3>
+                        <p>by NSMOD</p>
                     </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
-
-        <a href="https://tasksub.io/l5f6UwM" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/APP120HZ.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>UNLOCK 120HZ IOS</h3>
-                    <p>GIÚP MÀN HÌNH MƯỢT HƠN</p>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
+            
+            
+            
+            <a href="https://t.me/sonchoigame23/28" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/appMOD/IMGAPP1.png" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>APP 3105</h3>
+                        <p>v3 UPDATE NEW</p>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
 
-        <a href="https://oklink2.online/DUOLINGOMAX" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/duolingo.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>UNLOCK DUOLINGO MAX</h3>
-                    <p>•CÓ CHẾ ĐỘ GỌI</p>
+            <a href=" https://vuotlink.xyz/Fileapp3105 " class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/appMOD/IMGAPP1.png" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>APP 3105</h3>
+                        <p>v1.1.1</p>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
 
-
-        <a href="https://tasksub.io/mpCJ" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/tải xuống.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>MESSENGER VIPP</h3>
-                    <p>• XEM ĐƯỢC TIN NHẮN THU HỒI ,...</p>
+            <a href="https://tasksub.io/cR0bYH" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/8ballpool.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>iPA MENU NO KEY 8BP</h3>
+                        <p>• Đã cập nhật 29/8</p>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                            <span class="mini-tag"><i class="fa-solid fa-shield-halved"></i> Antiban</span>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
 
-
-        <a href="https://tasksub.io/BbwSHr" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/ytb.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>YOUTUBE PREMIUM</h3>
-                    <p>• ĐÃ CẬP NHẬT 9/9</p>
+            <a href="https://tasksub.io/l5f6UwM" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/APP120HZ.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>UNLOCK 120HZ IOS</h3>
+                        <p>GIÚP MÀN HÌNH MƯỢT HƠN</p>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
 
-
-        <a href="https://tasksub.io/q0uDI" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/capcutpro.jpg" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>CAPCUT PRO</h3>
-                    <p>• ĐÃ CẬP NHẬT 9/9</p>
+            <a href="https://oklink2.online/DUOLINGOMAX" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/duolingo.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>UNLOCK DUOLINGO MAX</h3>
+                        <p>•CÓ CHẾ ĐỘ GỌI</p>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
 
 
-
-        <a href="https://tasksub.io/0rhUy" class="link-card" target="_blank">
-            <div class="link-left">
-                <img src="images/ipa/filza-1.png" class="link-thumb" alt="Guide">
-                <div class="link-info">
-                    <h3>Filza Mod</h3>
-                    <p>• Tích Hợp APP 3105, Mond</p>
+            <a href="https://tasksub.io/mpCJ" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/tải xuống.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>MESSENGER VIPP</h3>
+                        <p>• XEM ĐƯỢC TIN NHẮN THU HỒI ,...</p>
+                    </div>
                 </div>
-            </div>
-            <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
-        </a>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
+
+
+            <a href="https://tasksub.io/BbwSHr" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/ytb.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>YOUTUBE PREMIUM</h3>
+                        <p>• ĐÃ CẬP NHẬT 9/9</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
+
+
+            <a href="https://tasksub.io/q0uDI" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/capcutpro.jpg" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>CAPCUT PRO</h3>
+                        <p>• ĐÃ CẬP NHẬT 9/9</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
+
+
+
+            <a href="https://tasksub.io/0rhUy" class="link-card" target="_blank">
+                <div class="link-left">
+                    <img src="images/ipa/filza-1.png" class="link-thumb" alt="Guide">
+                    <div class="link-info">
+                        <h3>Filza Mod</h3>
+                        <p>• Tích Hợp APP 3105, Mond</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
+            </a>
+        </div>
 
 
 
@@ -1321,59 +1342,52 @@ body.searching .section-heading {
 
 
     <script>
-                // TÌM KIẾM FILE
-const searchInput = document.getElementById("searchInput");
-const searchNoResult = document.getElementById("searchNoResult");
+                // TÌM KIẾM FILE — chỉ tìm trong .searchable-section (các khu vực có file),
+        // không đụng tới "đăng ký kênh", "nhóm thông báo", hay "video hướng dẫn".
+        const searchInput = document.getElementById("searchInput");
+        const searchSections = document.querySelectorAll(".searchable-section");
+        const searchNoResult = document.getElementById("searchNoResult");
 
-const searchItemsList = document.querySelectorAll(
-    ".mod-card, .link-card"
-);
+        function searchItems() {
+            const keyword = searchInput.value.toLowerCase().trim();
+            document.body.classList.toggle("searching", keyword !== "");
+            let totalFound = 0;
 
-function searchItems() {
-    const keyword = searchInput.value.toLowerCase().trim();
-    let found = 0;
+            searchSections.forEach(section => {
+                const items = section.querySelectorAll(".mod-card, .link-card");
+                let sectionFound = 0;
 
-    // Không nhập gì thì hiện lại giao diện ban đầu
-    if (keyword === "") {
-        document.body.classList.remove("searching");
+                items.forEach(item => {
+                    // Văn bản tìm kiếm = nội dung hiển thị + data-keywords (nếu có)
+                    const text = (
+                        item.innerText + " " +
+                        (item.dataset.keywords || "")
+                    ).toLowerCase();
 
-        searchItemsList.forEach(item => {
-            item.classList.remove("search-item-hidden");
-        });
+                    if (text.includes(keyword)) {
+                        item.classList.remove("search-item-hidden");
+                        sectionFound++;
+                    } else {
+                        item.classList.add("search-item-hidden");
+                    }
+                });
 
-        searchNoResult.style.display = "none";
-        return;
-    }
+                // Ẩn cả heading/tag của khu vực nếu không có file nào khớp
+                if (keyword && sectionFound === 0) {
+                    section.classList.add("search-item-hidden");
+                } else {
+                    section.classList.remove("search-item-hidden");
+                }
 
-    // Đang tìm thì ẩn các tiêu đề nhóm
-    document.body.classList.add("searching");
+                totalFound += sectionFound;
+            });
 
-    searchItemsList.forEach(item => {
-        const title = item.querySelector(
-            "h3, h4"
-        )?.innerText.toLowerCase() || "";
-
-        const description = item.innerText.toLowerCase();
-
-        // Chỉ tìm theo tên tiêu đề file và nội dung bên trong card
-        if (
-            title.includes(keyword) ||
-            description.includes(keyword)
-        ) {
-            item.classList.remove("search-item-hidden");
-            found++;
-        } else {
-            item.classList.add("search-item-hidden");
+            searchNoResult.style.display =
+                (keyword && totalFound === 0) ? "block" : "none";
         }
-    });
 
-    searchNoResult.style.display =
-        found === 0 ? "block" : "none";
-}
-
-// Tìm ngay khi nhập
-searchInput.addEventListener("input", searchItems);
-
+        // Tìm ngay khi nhập
+        searchInput.addEventListener("input", searchItems);
 
 
 
