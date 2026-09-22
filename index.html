@@ -15,7 +15,11 @@
         }
 
         body {
-            background-color: #0f1015;
+            background:
+                radial-gradient(circle at 50% -10%, rgba(139, 92, 246, 0.18), transparent 34%),
+                radial-gradient(circle at 0% 55%, rgba(6, 182, 212, 0.07), transparent 28%),
+                radial-gradient(circle at 100% 75%, rgba(168, 85, 247, 0.08), transparent 30%),
+                #070910;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -23,6 +27,43 @@
             min-height: 100vh;
             padding: 20px;
             scroll-behavior: smooth;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Nền cyber/grid toàn trang */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.34;
+            background-image:
+                linear-gradient(rgba(124, 58, 237, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(124, 58, 237, 0.055) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, rgba(0,0,0,.7) 55%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black, rgba(0,0,0,.7) 55%, transparent 100%);
+        }
+
+        /* Lớp ánh sáng premium */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: -20%;
+            z-index: 0;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(168,85,247,.08), transparent 24%),
+                radial-gradient(circle at 80% 60%, rgba(34,211,238,.055), transparent 26%);
+            filter: blur(35px);
+            animation: ambientMove 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes ambientMove {
+            from { transform: translate3d(-1%, -1%, 0) scale(1); }
+            to   { transform: translate3d(1%, 1%, 0) scale(1.04); }
         }
 
         .container {
@@ -31,6 +72,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         /* Top Bar (Clock & Menu) */
@@ -612,9 +655,47 @@
 
         /* Hiệu ứng cho Popup Chào Mừng Siêu Sáng & Nổi Bật */
         .welcome-modal-box {
-            background: linear-gradient(145deg, #181920, #1f2029);
-            border: 2px solid #9f0bf5;
-            box-shadow: 0 0 30px rgba(199, 161, 221, 0.4), inset 0 0 15px rgba(160, 124, 245, 0.2);
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.16), transparent 42%),
+                linear-gradient(145deg, rgba(10, 13, 24, 0.98), rgba(16, 18, 31, 0.98));
+            border: 1px solid rgba(168, 85, 247, 0.65);
+            box-shadow:
+                0 0 0 1px rgba(6, 182, 212, 0.08),
+                0 25px 80px rgba(0,0,0,.72),
+                0 0 45px rgba(124, 58, 237, 0.22),
+                inset 0 1px 0 rgba(255,255,255,.08);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+        }
+
+        .welcome-modal-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #22d3ee, #a855f7, transparent);
+            box-shadow: 0 0 18px rgba(34,211,238,.55);
+        }
+
+        .welcome-modal-box::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            opacity: .18;
+            background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+            background-size: 24px 24px;
+            mask-image: linear-gradient(to bottom, black, transparent 75%);
+            -webkit-mask-image: linear-gradient(to bottom, black, transparent 75%);
+        }
+
+        .welcome-modal-box > * {
+            position: relative;
+            z-index: 1;
         }
 
         .glowing-welcome-text {
@@ -646,7 +727,7 @@
             align-items: center;
             justify-content: center;
             font-size: 26px;
-            color: #d11f12;
+            color: #67e8f9;
             margin: 0 auto 15px auto;
             animation: iconPulse 2s infinite alternate;
         }
@@ -656,19 +737,225 @@
             100% { transform: scale(1.08); box-shadow: 0 0 15px rgba(54, 1, 124, 0.6); }
         }
 
+        .welcome-modal-box .modal-btn.confirm {
+            background: linear-gradient(135deg, #7c3aed, #2563eb 55%, #0891b2);
+            border: 1px solid rgba(255,255,255,.14);
+            box-shadow: 0 0 22px rgba(124,58,237,.28), inset 0 1px 0 rgba(255,255,255,.15);
+            letter-spacing: .5px;
+        }
+
+        .welcome-modal-box .modal-btn.confirm:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 0 30px rgba(34,211,238,.25), 0 8px 25px rgba(0,0,0,.35);
+        }
+
+        /* ================= PREMIUM CATEGORY NAV ================= */
+        .category-slider {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            margin: 2px 0 16px;
+            padding: 7px;
+            border: 1px solid rgba(139,92,246,.30);
+            border-radius: 18px;
+            background:
+                linear-gradient(135deg, rgba(139,92,246,.13), rgba(59,130,246,.07) 55%, rgba(255,255,255,.018));
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.075),
+                0 0 0 1px rgba(59,130,246,.035),
+                0 12px 35px rgba(0,0,0,.24),
+                0 0 28px rgba(124,58,237,.08);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.055),
+                0 12px 35px rgba(0,0,0,.24);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng ánh sáng chạy ngang để gợi ý có thể vuốt */
+        .category-slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: -35%;
+            width: 28%;
+            pointer-events: none;
+            z-index: 4;
+            background: linear-gradient(90deg, transparent, rgba(168,85,247,.08), rgba(96,165,250,.20), rgba(255,255,255,.08), transparent);
+            filter: blur(7px);
+            transform: skewX(-18deg);
+            animation: categorySwipeGlow 3.8s ease-in-out infinite;
+        }
+
+        @keyframes categorySwipeGlow {
+            0%, 35% { left: -35%; opacity: 0; }
+            45% { opacity: .9; }
+            65% { opacity: .9; }
+            100% { left: 110%; opacity: 0; }
+        }
+
+        .category-slider::before {
+            content: '↔';
+            position: absolute;
+            right: 14px;
+            bottom: 2px;
+            z-index: 5;
+            pointer-events: none;
+            color: rgba(192,132,252,.42);
+            font-size: 10px;
+            letter-spacing: 2px;
+            opacity: .75;
+            animation: swipeHint 2.4s ease-in-out infinite;
+        }
+
+        @keyframes swipeHint {
+            0%, 100% { transform: translateX(-3px); opacity: .25; }
+            50% { transform: translateX(3px); opacity: .8; }
+        }
+
+        .quick-tabs {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 0;
+            overflow-x: auto;
+            padding: 1px 2px;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .quick-tabs::-webkit-scrollbar { display: none; }
+
+        .quick-tabs {
+            cursor: grab;
+            touch-action: pan-x;
+            user-select: none;
+        }
+
+        .quick-tabs.is-dragging {
+            cursor: grabbing;
+            scroll-behavior: auto;
+        }
+
+        .tab-pill {
+            position: relative;
+            flex: 0 0 auto;
+            white-space: nowrap;
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,.075);
+            background: rgba(255,255,255,.025);
+            color: #94a3b8;
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: .25px;
+            cursor: pointer;
+            transition:
+                transform .25s ease,
+                color .25s ease,
+                background .25s ease,
+                border-color .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .tab-pill:hover {
+            color: #fff;
+            transform: translateY(-1px);
+            border-color: rgba(168,85,247,.42);
+            background: linear-gradient(135deg, rgba(168,85,247,.13), rgba(59,130,246,.07));
+            box-shadow: 0 8px 22px rgba(124,58,237,.10);
+        }
+
+        .tab-pill.active {
+            color: #fff;
+            border-color: rgba(168,85,247,.62);
+            background: linear-gradient(135deg, rgba(139,92,246,.27), rgba(59,130,246,.15));
+            box-shadow:
+                0 0 0 1px rgba(168,85,247,.07),
+                0 8px 25px rgba(124,58,237,.16);
+        }
+
+        .tab-pill.active::after {
+            content: '';
+            position: absolute;
+            left: 18%;
+            right: 18%;
+            bottom: -1px;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, #a855f7, #60a5fa, transparent);
+            opacity: .85;
+        }
+
+        /* ================= PREMIUM CARDS ================= */
+        .link-card,
+        .mod-card,
+        .stats-box,
+        .social-btn,
+        .search-box input {
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.035),
+                0 10px 30px rgba(0,0,0,.12);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .link-card,
+        .mod-card {
+            position: relative;
+            overflow: hidden;
+            transition:
+                transform .25s ease,
+                border-color .25s ease,
+                background .25s ease,
+                box-shadow .25s ease;
+        }
+
+        .link-card::before,
+        .mod-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(120deg, rgba(255,255,255,.045), transparent 32%);
+            opacity: .7;
+        }
+
+        .link-card:hover,
+        .mod-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,.075);
+            border-color: rgba(168,85,247,.28);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.055),
+                0 15px 38px rgba(0,0,0,.24),
+                0 0 24px rgba(124,58,237,.07);
+        }
+
+
         /* Thanh tìm kiếm */
         .search-box {
+            background: transparent !important;
+            border: none !important;
+            outline: none !important;
             width: 100%;
             display: flex;
             gap: 10px;
             margin-bottom: 25px;
+            box-shadow: none !important;
+            filter: none !important;
         }
 
         .search-box input {
             flex: 1;
             min-width: 0;
             padding: 14px 18px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            border: none !important;
             border-radius: 14px;
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
@@ -681,8 +968,9 @@
         }
 
         .search-box input:focus {
-            border-color: #818cf8;
-            box-shadow: 0 0 15px rgba(129, 140, 248, 0.15);
+            border-color: rgba(255,255,255,.18);
+            box-shadow: none !important;
+            outline: none !important;
         }
 
         .search-box button {
@@ -727,9 +1015,69 @@
 
 
 
+    
+        /* ================= SNOW EFFECT ================= */
+        #snowLayer {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .snowflake {
+            position: absolute;
+            top: -30px;
+            color: rgba(238,248,255,.92);
+            font-size: var(--size);
+            opacity: var(--opacity);
+            filter: blur(var(--blur));
+            text-shadow:
+                0 0 5px rgba(255,255,255,.85),
+                0 0 12px rgba(180,220,255,.55);
+            animation:
+                snowFall var(--duration) linear infinite,
+                snowSide var(--sway) ease-in-out infinite alternate;
+        }
+
+        @keyframes snowFall {
+            from { transform: translate3d(0,-40px,0); }
+            to   { transform: translate3d(0,110vh,0); }
+        }
+
+        @keyframes snowSide {
+            from { margin-left: -25px; }
+            to   { margin-left: 25px; }
+        }
+
+        @media (max-width: 600px) {
+            .snowflake {
+                font-size: calc(var(--size) * .82);
+                opacity: calc(var(--opacity) * .82);
+            }
+
+            .tab-pill {
+                padding: 9px 12px;
+                font-size: 10px;
+            }
+
+            .category-slider {
+                border-radius: 15px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .snowflake {
+                animation: none;
+                display: none;
+            }
+        }
+
     </style>
 </head>
 <body>
+    <!-- Tuyết rơi trang trí: không chặn thao tác người dùng -->
+    <div id="snowLayer" aria-hidden="true"></div>
 
     <!-- Phát nhạc nền tự động khi vào web -->
     <audio id="bg-music" loop>
@@ -747,8 +1095,7 @@
                 <i class="fa-solid fa-compass" title="Mở ngoài trình duyệt"></i>
             </div>
         </div>
-
-        <!-- Khung Avatar Thách Đấu Liên Quân -->
+<!-- Khung Avatar Thách Đấu Liên Quân -->
         <div class="conqueror-avatar-wrapper">
             <div class="avatar-container">
                 <img src="images/avt/avt.jpg" alt="Avatar" >
@@ -810,6 +1157,23 @@
         </div>
 
 
+        <!-- THANH DANH MỤC CỦA SONCHOIGAME -->
+        <div class="category-slider">
+            <div class="quick-tabs" id="quickTabs">
+                <button type="button" class="tab-pill active" data-filter="all">🔥 TẤT CẢ</button>
+                <button type="button" class="tab-pill" data-filter="raw">🔗 NGUỒN RAW</button>
+                <button type="button" class="tab-pill" data-filter="ipa">📦 IPA</button>
+                <button type="button" class="tab-pill" data-filter="app">📱 APP</button>
+                <button type="button" class="tab-pill" data-filter="bypass">🛡️ BYPASS + TOOL</button>
+                <button type="button" class="tab-pill" data-filter="patch">🎮 PATCH GAME</button>
+                <button type="button" class="tab-pill" data-filter="config">⚙️ CONFIG</button>    
+                <button type="button" class="tab-pill" data-filter="trick">💥 TRICK LỎ</button>
+                <button type="button" class="tab-pill" data-filter="guide">📘 HƯỚNG DẪN</button>
+                <button type="button" class="tab-pill" data-filter="wallpapers">🖼️ WALLPAPERS</button>
+                <button type="button" class="tab-pill" data-filter="antiban">🛡️ ANTIBAN</button>
+            </div>
+        </div>
+
         <!-- THANH TÌM KIẾM -->
         <div class="search-box">
             <input
@@ -828,7 +1192,7 @@
         </div>
 
         <!-- Hướng Dẫn MOD  -->
-         <div class="searchable-section">
+         <div class="searchable-section" data-category="guide">
           <div class="section-tag video-guide-only"><i class="fa-solid fa-tv"></i> Video Hướng Dẫn</div>
 
 
@@ -847,7 +1211,7 @@
             </div>
             <i class="fa-solid fa-chevron-right link-action"></i>
         </a>
-        </div>
+        
 
 
         <a href="https://www.tiktok.com/@pettersiuto/video/7681965920205409554" class="link-card video-guide-only" target="_blank">
@@ -865,9 +1229,10 @@
             </div>
             <i class="fa-solid fa-chevron-right link-action"></i>
         </a>
+        </div>
 
         <!-- TOOL FACEBOOK -->
-         <div class="searchable-section">
+         <div class="searchable-section" data-category="trick guide">
             <div class="section-tag"><i class="fa-brands fa-facebook"></i> TRICK LỎ FACEBOOK </div>
             
             
@@ -921,7 +1286,7 @@
 
 
         <!-- FAKE GPS -->
-        <div class="searchable-section">
+        <div class="searchable-section" data-category="config trick">
             <div class="section-tag"><i class="fa-solid fa-location-dot"></i> FAKE GPS + CONFIG </div>
             
             
@@ -976,7 +1341,7 @@
         </div>    
 
              <!-- Mục HÌNH NỀN + PASSCODE -->
-        <div class="searchable-section">
+        <div class="searchable-section" data-category="wallpapers">
             <div class="section-tag"><i class="fa-slab fa-regular fa-image"></i> HÌNH NỀN + PASSCODE THEME</div>
             <h2 class="section-heading" style="width: 100%;"> PASSCODE THEME </h2>
 
@@ -1052,7 +1417,7 @@
         
         </div>
         <!-- Mục Game Mods -->
-        <div class="searchable-section">
+        <div class="searchable-section" data-category="patch">
             <div class="section-tag"><i class="fa-solid fa-gamepad"></i> PATCH 3105 + FILE MOD</div>
             
             
@@ -1150,7 +1515,7 @@
         </div>
 
         <!--MỤC TẢI FILE CẤU HÌNH -->
-         <div class="searchable-section">
+         <div class="searchable-section" data-category="raw">
 
                 <h2 class="section-heading" style="width: 100%;"> NGUỒN RAW </h2>
 
@@ -1263,7 +1628,7 @@
 
 
          <!-- MỤC BYPASS -->
-          <div class="searchable-section">
+          <div class="searchable-section" data-category="bypass">
 
                 <h2 class="section-heading" style="width: 100%;"> FILE BYPASS + ANTIBAN </h2>
 
@@ -1285,7 +1650,7 @@
                 
                 <a href="https://tasksub.io/PMlRN" class="mod-card" target="_blank">
                     <div class="mod-left">
-                        <img src="/images/filemod/claude_logo.jpg" class="mod-thumb" alt="Game">
+                        <img src="images/filemod/claude_logo.jpg" class="mod-thumb" alt="Game">
                         <div class="mod-details">
                             <h4> FILE BYPASS AI CLAUDE  </h4>
                             <p>• DÁN INSTRUCTION </p>
@@ -1316,7 +1681,10 @@
                     </div>
                     <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
                 </a>
+          </div>
 
+           <div class="searchable-section" data-category="antiban">
+                <div class="section-tag"><i class="fa-solid fa-shield-halved"></i> ANTIBAN</div>
                 <a href="https://tasksub.io/k81uUim" class="mod-card" target="_blank">
                     <div class="mod-left">
                         <img src="images/filemod/DNSANTI.png" class="mod-thumb" alt="Game">
@@ -1341,7 +1709,7 @@
 
 
         <!-- MỤC FILES MOD-->
-         <div class="searchable-section">
+         <div class="searchable-section" data-category="antiban">
             <h2 class="section-heading" style="width: 100%;"> FILE MOD + ANTI CÁC VỢ TỰ DÁN NHÉ </h2>
             <a href="https://tasksub.io/rua" class="mod-card" target="_blank">
                 <div class="mod-left">
@@ -1359,13 +1727,14 @@
                 </div>
                 <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
             </a>
+         </div>
 
 
 
         
 
         <!-- Tải iPA -->
-         <div class="searchable-section">
+         <div class="searchable-section" data-category="ipa app">
             <div id="get-key-section" class="section-tag"><i class=" fa-brands fa-app-store"></i> APP CRACK + MODS GAME</div>
             <h2 class="section-heading" style="width: 100%;">TẢI IPA</h2>
 
@@ -1504,7 +1873,7 @@
                 </div>
                 <i class="fa-solid fa-arrow-up-right-from-square link-action"></i>
             </a>
-        </div>
+
 
 
 
@@ -1562,21 +1931,121 @@
     <div class="modal-overlay active" id="welcomeModal">
         <div class="modal-box welcome-modal-box" onclick="event.stopPropagation()">
             <div class="welcome-icon-badge">
-                <i class="fa-solid fa-triangle-exclamation"></i>
+                <i class="fa-solid fa-terminal"></i>
             </div>
+
+            <div style="font-size:10px; font-weight:800; letter-spacing:2px; color:#22d3ee; margin-bottom:8px;">SYSTEM // SECURE ACCESS</div>
+
+            <h3 style="margin-bottom:8px; font-size:24px; letter-spacing:1px; background:linear-gradient(90deg,#fff,#c4b5fd,#67e8f9); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">WELCOME TO NS MOD</h3>
+
             <div class="glowing-welcome-text">
-        
-                MỌI THẮC MẮC HỎI ADMIN <br>TELE: @Sonchoigame123<br>CHÚC CÁC VỢ DÙNG VUI VẺ 💝
+                ACCESS GRANTED • SONCHOIGAME
             </div>
+
+            <div style="display:flex; align-items:center; justify-content:center; gap:7px; margin:-6px 0 18px; font-size:11px; color:#94a3b8;">
+                <span style="width:7px; height:7px; border-radius:50%; background:#22c55e; box-shadow:0 0 10px #22c55e;"></span>
+                NS ONLINE • CONTENT UPDATED
+            </div>
+
+            <p style="font-size:12px; line-height:1.7; color:#94a3b8; margin-bottom:20px;">
+                KHO LƯU TRỮ MOD VÀ TIỆN ÍCH CỦA NSMOD
+                <br><span style="color:#c4b5fd;">Telegram: @Sonchoigame123</span>
+            </p>
+
             <div class="modal-actions">
-                <button class="modal-btn confirm" onclick="closeWelcomeModal()" style="width: 100%;">ĐÃ HIỂU, VÀO WEB</button>
+                <button class="modal-btn confirm" onclick="closeWelcomeModal()" style="width:100%;">
+                    <i class="fa-solid fa-shield-halved" style="margin-right:8px;"></i> VÀO WEB NGAY 
+                </button>
             </div>
         </div>
     </div>
 
 
     <script>
-                // TÌM KIẾM FILE — chỉ tìm trong .searchable-section (các khu vực có file),
+        
+        /* ================= SNOW ================= */
+        (function createSnow() {
+            const layer = document.getElementById('snowLayer');
+            if (!layer) return;
+
+            const count = window.innerWidth <= 600 ? 18 : 32;
+
+            for (let i = 0; i < count; i++) {
+                const snow = document.createElement('span');
+                snow.className = 'snowflake';
+                snow.textContent = '•';
+
+                snow.style.left = (Math.random() * 100) + '%';
+                snow.style.setProperty('--size', (Math.random() * 12 + 6) + 'px');
+                snow.style.setProperty('--opacity', (Math.random() * .38 + .52).toFixed(2));
+                snow.style.setProperty('--blur', (Math.random() * 1.1).toFixed(1) + 'px');
+                snow.style.setProperty('--duration', (Math.random() * 8 + 7) + 's');
+                snow.style.setProperty('--sway', (Math.random() * 3 + 2) + 's');
+                snow.style.animationDelay = '-' + (Math.random() * 12) + 's';
+
+                layer.appendChild(snow);
+            }
+        })();
+
+        /* ================= TRƯỢT + LỌC THANH DANH MỤC ================= */
+        const quickTabs = document.getElementById("quickTabs");
+        let activeCategory = "all";
+
+        // Vuốt ngang trên mobile bằng native scroll + kéo bằng chuột trên PC.
+        // Quan trọng: không dùng setPointerCapture để không chặn sự kiện click của button.
+        let isDraggingTabs = false;
+        let tabsMoved = false;
+        let tabsStartX = 0;
+        let tabsStartScroll = 0;
+
+        quickTabs.addEventListener("pointerdown", function (event) {
+            if (event.pointerType !== "mouse" || event.button !== 0) return;
+            isDraggingTabs = true;
+            tabsMoved = false;
+            tabsStartX = event.clientX;
+            tabsStartScroll = quickTabs.scrollLeft;
+        });
+
+        quickTabs.addEventListener("pointermove", function (event) {
+            if (!isDraggingTabs) return;
+            const distance = event.clientX - tabsStartX;
+
+            if (Math.abs(distance) > 5) {
+                tabsMoved = true;
+                quickTabs.classList.add("is-dragging");
+                quickTabs.scrollLeft = tabsStartScroll - distance;
+            }
+        });
+
+        function stopTabsDrag() {
+            isDraggingTabs = false;
+            quickTabs.classList.remove("is-dragging");
+        }
+
+        quickTabs.addEventListener("pointerup", stopTabsDrag);
+        quickTabs.addEventListener("pointercancel", stopTabsDrag);
+
+        // Chỉ chặn click nếu người dùng thực sự kéo thanh.
+        quickTabs.addEventListener("click", function (event) {
+            if (tabsMoved) {
+                event.preventDefault();
+                event.stopPropagation();
+                tabsMoved = false;
+            }
+        }, true);
+
+        document.querySelectorAll(".tab-pill").forEach(function (button) {
+            button.addEventListener("click", function () {
+                document.querySelectorAll(".tab-pill").forEach(function (item) {
+                    item.classList.remove("active");
+                });
+                button.classList.add("active");
+                activeCategory = button.dataset.filter || "all";
+                searchItems();
+            });
+        });
+
+        // TÌM KIẾM FILE — chỉ tìm trong .searchable-section (các khu vực có file),
         // không đụng tới "đăng ký kênh", "nhóm thông báo", hay "video hướng dẫn".
         const searchInput = document.getElementById("searchInput");
         const searchSections = document.querySelectorAll(".searchable-section");
@@ -1588,6 +2057,8 @@
             let totalFound = 0;
 
             searchSections.forEach(section => {
+                const sectionCategories = (section.dataset.category || "").split(/\s+/).filter(Boolean);
+                const categoryMatch = activeCategory === "all" || sectionCategories.includes(activeCategory);
                 const items = section.querySelectorAll(".mod-card, .link-card");
                 let sectionFound = 0;
 
@@ -1598,7 +2069,7 @@
                         (item.dataset.keywords || "")
                     ).toLowerCase();
 
-                    if (text.includes(keyword)) {
+                    if (categoryMatch && text.includes(keyword)) {
                         item.classList.remove("search-item-hidden");
                         sectionFound++;
                     } else {
@@ -1607,7 +2078,7 @@
                 });
 
                 // Ẩn cả heading/tag của khu vực nếu không có file nào khớp
-                if (keyword && sectionFound === 0) {
+                if (!categoryMatch || (keyword && sectionFound === 0)) {
                     section.classList.add("search-item-hidden");
                 } else {
                     section.classList.remove("search-item-hidden");
@@ -1622,6 +2093,7 @@
 
         // Tìm ngay khi nhập
         searchInput.addEventListener("input", searchItems);
+        searchItems();
 
 
 
