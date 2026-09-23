@@ -26,7 +26,8 @@
             align-items: center;
             min-height: 100vh;
             padding: 20px;
-            scroll-behavior: smooth;
+            scroll-behavior: auto;
+            overflow-anchor: none;
             position: relative;
             overflow-x: hidden;
         }
@@ -1016,44 +1017,46 @@
 
 
     
-        /* ================= SNOW EFFECT ================= */
+        /* ================= SNOW EFFECT 9:16 ================= */
         #snowLayer {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 50%;
+            width: min(100vw, 480px);
+            height: 100dvh;
+            transform: translateX(-50%);
             overflow: hidden;
             pointer-events: none;
             z-index: 1;
+            contain: strict;
         }
 
         .snowflake {
             position: absolute;
-            top: -30px;
+            top: -28px;
             color: rgba(238,248,255,.92);
             font-size: var(--size);
             opacity: var(--opacity);
-            filter: blur(var(--blur));
-            text-shadow:
-                0 0 5px rgba(255,255,255,.85),
-                0 0 12px rgba(180,220,255,.55);
-            animation:
-                snowFall var(--duration) linear infinite,
-                snowSide var(--sway) ease-in-out infinite alternate;
+            text-shadow: 0 0 7px rgba(255,255,255,.75);
+            animation: snowFall var(--duration) linear infinite;
+            line-height: 1;
+            will-change: top, transform;
         }
 
         @keyframes snowFall {
-            from { transform: translate3d(0,-40px,0); }
-            to   { transform: translate3d(0,110vh,0); }
-        }
-
-        @keyframes snowSide {
-            from { margin-left: -25px; }
-            to   { margin-left: 25px; }
+            0% { top: -30px; transform: translate3d(0,0,0); }
+            100% { top: calc(100dvh + 30px); transform: translate3d(var(--drift),0,0); }
         }
 
         @media (max-width: 600px) {
+            #snowLayer {
+                width: 100vw;
+                height: 100dvh;
+                max-height: 100dvh;
+            }
+
             .snowflake {
-                font-size: calc(var(--size) * .82);
-                opacity: calc(var(--opacity) * .82);
+                font-size: var(--size);
             }
 
             .tab-pill {
@@ -1071,6 +1074,16 @@
                 animation: none;
                 display: none;
             }
+        }
+
+        /* Không tự động neo/nhảy trang khi lọc nội dung */
+        .searchable-section, .search-item-hidden {
+            overflow-anchor: none;
+        }
+
+        html {
+            overflow-anchor: none;
+            scroll-behavior: auto !important;
         }
 
     </style>
@@ -1423,6 +1436,47 @@
             
             <!-- MỤC FILE .3105-->
             <h2 class="section-heading" style="width: 100%;"> FILE PATCH TRÊN 3105 </h2>
+
+
+            <a href="https://docs.google.com/document/d/1H6JgKkk0vBQLTCXNiQA_Hlv9DrcFPOg7JlnijUFQHgQ/edit?usp=sharing" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/FFTH.webp" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> RESET ACC KHÁCH FFTH   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA</p>
+                         <span class="search-keywords"> modskin lq , modskin liên quân, modskin , skin lq, skin </span>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+
+
+            <a href="https://docs.google.com/document/d/10bK7svd5l7ZqulvE8vEeotypipHj58uiP-VKNg9XEB4/edit?usp=sharing" class="mod-card" target="_blank">
+                <div class="mod-left">
+                    <img src="images/filemod/unnamed.webp" class="mod-thumb" alt="Game">
+                    <div class="mod-details">
+                        <h4> RESET TRẬN LQ   </h4>
+                        <p>• DÙNG CHO APP 3105</p>
+                        <p>• GAME GỐC NO IPA</p>
+                         <span class="search-keywords"> modskin lq , modskin liên quân, modskin , skin lq, skin </span>
+                        <div class="tags-row">
+                            <span class="mini-tag"><i class="fa-solid fa-video"></i> Nhớ Xem Video PATCH Bằng 3105</span>
+                            <span class="mini-tag"><i class="fa-brands fa-apple"></i> iOS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-btn"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+            </a>
+
+
+
+
+
 
             <a href="https://t.me/sonchoigame4/2/50" class="mod-card" target="_blank">
                 <div class="mod-left">
@@ -1968,7 +2022,7 @@
             const layer = document.getElementById('snowLayer');
             if (!layer) return;
 
-            const count = window.innerWidth <= 600 ? 18 : 32;
+            const count = window.innerWidth <= 600 ? 8 : 12;
 
             for (let i = 0; i < count; i++) {
                 const snow = document.createElement('span');
@@ -1976,12 +2030,12 @@
                 snow.textContent = '•';
 
                 snow.style.left = (Math.random() * 100) + '%';
-                snow.style.setProperty('--size', (Math.random() * 12 + 6) + 'px');
+                snow.style.setProperty('--size', (Math.random() * 10 + 12) + 'px');
                 snow.style.setProperty('--opacity', (Math.random() * .38 + .52).toFixed(2));
-                snow.style.setProperty('--blur', (Math.random() * 1.1).toFixed(1) + 'px');
-                snow.style.setProperty('--duration', (Math.random() * 8 + 7) + 's');
-                snow.style.setProperty('--sway', (Math.random() * 3 + 2) + 's');
+                snow.style.setProperty('--drift', (Math.random() * 50 - 25).toFixed(0) + 'px');
+                snow.style.setProperty('--duration', (Math.random() * 6 + 9) + 's');
                 snow.style.animationDelay = '-' + (Math.random() * 12) + 's';
+                snow.style.top = (Math.random() * 100) + 'dvh';
 
                 layer.appendChild(snow);
             }
@@ -2041,7 +2095,9 @@
                 });
                 button.classList.add("active");
                 activeCategory = button.dataset.filter || "all";
+                const keepY = window.scrollY;
                 searchItems();
+                requestAnimationFrame(() => window.scrollTo({ top: keepY, left: 0, behavior: "auto" }));
             });
         });
 
@@ -2091,8 +2147,15 @@
                 (keyword && totalFound === 0) ? "block" : "none";
         }
 
-        // Tìm ngay khi nhập
-        searchInput.addEventListener("input", searchItems);
+        // Tìm ngay khi nhập — giữ nguyên vị trí màn hình, không cho trang tự nhảy
+        searchInput.addEventListener("input", function () {
+            const keepY = window.scrollY;
+            searchItems();
+            requestAnimationFrame(() => {
+                window.scrollTo(0, keepY);
+                requestAnimationFrame(() => window.scrollTo(0, keepY));
+            });
+        });
         searchItems();
 
 
